@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/flat-ui.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container">
+      <h2>Ипотечный калькулятор</h2>
+      <div class="row">
+        <div class="col-md-12">
+          <h4>Расчёт ежемесячного платежа</h4>
+          <form role="form" id="form1">
+            <div class="form-group">
+              <label for="sum1">Стоимость квартиры</label>
+              <input type="text" class="form-control" id="sum1" placeholder="Введите стоимость квартиры в тенге" value="">
+            </div>
+            <div class="form-group">
+              <label for="period1">Период</label>
+              <input type="text" class="form-control" id="period1" placeholder="Введите срок кредита в годах" value="">
+            </div>
+            <div class="form-group">
+              <label for="rate1">Ставка</label>
+              <input type="text" class="form-control" id="rate1" placeholder="Введите ставку в процентах" value="">
+            </div>
+            <button type="submit" class="btn btn-success" id="calc1">Рассчитать</button>
+          </form>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-12">
+          <h4>Расчёт срока</h4>
+          <form role="form" id="form2">
+            <div class="form-group">
+              <label for="sum2">Стоимость квартиры</label>
+              <input type="text" class="form-control" id="sum2" placeholder="Введите стоимость квартиры в тенге" value="">
+            </div>
+            <div class="form-group">
+              <label for="payment2">Ежемесячный платеж</label>
+              <input type="text" class="form-control" id="payment2" placeholder="Введите сумму ежемесячного платежа в тенге" value="">
+            </div>
+            <div class="form-group">
+              <label for="rate2">Ставка</label>
+              <input type="text" class="form-control" id="rate2" placeholder="Введите ставку в процентах" value="">
+            </div>
+            <button type="submit" class="btn btn-success" id="calc2">Рассчитать</button>
+          </form>
+        </div>
+      </div>
+      <br>
+    </div>
+    <script src="js/main.js"></script>
+    <script>
+
+        var form1 = document.querySelector('#form1'),
+            sum1 = document.querySelector('#sum1'),
+            period1 = document.querySelector('#period1'),
+            rate1 = document.querySelector('#rate1'),
+            calc1 = document.querySelector('#calc1');
+
+        var form2 = document.querySelector('#form2'),
+            sum2 = document.querySelector('#sum2'),
+            payment2 = document.querySelector('#payment2'),
+            rate2 = document.querySelector('#rate2'),
+            calc2 = document.querySelector('#calc2');
+
+        form1.addEventListener('submit', function(e) {
+            var result,
+                elem = document.createElement('div');
+            e.preventDefault();
+            elem.innerHTML = 'Ежемесячный платеж, в тенге: ' + calculator.getPayment(sum1.value, period1.value, rate1.value);
+            form1.appendChild(elem);
+            form1.removeChild(calc1);
+        }, false);
+
+        form2.addEventListener('submit', function(e) {
+            var result,
+                elem = document.createElement('div');
+            e.preventDefault();
+            console.log(sum2.value, payment2.value, rate2.value);
+            elem.innerHTML = 'Срок, в месяцах: ' + calculator.getPeriod(sum2.value, payment2.value, rate2.value);
+            form2.appendChild(elem);
+            form2.removeChild(calc2);
+        }, false);
+
+    </script>
+  </body>
+</html>
